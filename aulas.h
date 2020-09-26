@@ -4,7 +4,7 @@ int escenasval[3][4][3] =  {
     {{111842, -32753, 701}, { 39686, -25474, 561}, { -7216, -50949, 751}, {97411,-72784,0}}};
 
 
-// escena[n][][] corresponde al SUM 1 (n=0), AU B11 (n=1), SUM 2 (n=2)
-// escena[][i][] corresponde a Pizarra (i=0), Pantalla (i=1), Profesor (i=2) y Vista General (i=3)
-// escena[][][j] corresponde a Pan (Absolute) (j=0), Tilt (Absolute) (j=1) y Zoom, Absolute (j=2)
+// escenasval[n][][] corresponde al SUM 1 (n=0), AU B11 (n=1), SUM 2 (n=2)
+// escenasval[][i][] corresponde a Pizarra (i=0), Pantalla (i=1), Profesor (i=2) y Vista General (i=3)
+// escenasval[][][j] corresponde a Pan (Absolute) (j=0), Tilt (Absolute) (j=1) y Zoom, Absolute (j=2)
 
