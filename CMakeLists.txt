@@ -13,6 +13,13 @@ LINK_DIRECTORIES(${GTK3_LIBRARY_DIRS})
 
 ADD_DEFINITIONS(${GTK3_CFLAGS_OTHER})
 
-add_executable(UATPTZLinux aulas.h UATPTZLinux.c)
+add_executable(UATPTZLinux classes.h UATPTZLinux.c resources.c)
 
 TARGET_LINK_LIBRARIES(UATPTZLinux ${GTK3_LIBRARIES})
+
+add_custom_target(compile_resources
+        COMMAND glib-compile-resources ${CMAKE_CURRENT_SOURCE_DIR}/uatptzlinux.gresource.xml --target=${CMAKE_CURRENT_SOURCE_DIR}/resources.c --generate-source --sourcedir=${CMAKE_CURRENT_SOURCE_DIR})
+
+add_dependencies(UATPTZLinux compile_resources)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -rdynamic")
