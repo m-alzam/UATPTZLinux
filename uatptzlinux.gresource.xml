@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+    <gresource prefix="/es/sevilinux/uatptzlinux">
+        <file preprocess="xml-stripblanks">layout.glade</file>
+    </gresource>
+</gresources>

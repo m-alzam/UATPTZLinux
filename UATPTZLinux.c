@@ -1,6 +1,6 @@
 #include <gtk/gtk.h>
 #include <string.h>
-#include "aulas.h"
+#include "classes.h"
 
 
 int maxpan = 606918;
@@ -39,28 +39,28 @@ void choose_device(GtkWidget *wid, gpointer ptr) {
 }
 
 
-void panrelp(GtkWidget *wid, gpointer ptr) {
+void turn_up(GtkWidget *wid, gpointer ptr) {
     if (panabs < (maxpan - steppan)) {
         panabs += steppan;
         go_to_scene();
     }
 }
 
-void panrelm(GtkWidget *wid, gpointer ptr) {
+void turn_down(GtkWidget *wid, gpointer ptr) {
     if (panabs > (minpan + steppan)) {
         panabs -= steppan;
         go_to_scene();
     }
 }
 
-void tiltrelp(GtkWidget *wid, gpointer ptr) {
+void turn_right(GtkWidget *wid, gpointer ptr) {
     if (tiltabs < (maxtilt - steptilt)) {
         tiltabs += steptilt;
         go_to_scene();
     }
 }
 
-void tiltrelm(GtkWidget *wid, gpointer ptr) {
+void turn_left(GtkWidget *wid, gpointer ptr) {
     if (tiltabs > (mintilt + steptilt)) {
         tiltabs -= steptilt;
         go_to_scene();
@@ -116,7 +116,7 @@ void go_to_scene() {
     system(comandozoom);
 }
 
-void resetescenas() {
+void reset_scenes() {
     panabs = 0;
     tiltabs = 0;
     zoomabs = 0;
@@ -124,7 +124,7 @@ void resetescenas() {
 }
 
 
-void pizarra(GtkWidget *wid, gpointer ptr) {
+void go_to_blackboard(GtkWidget *wid, gpointer ptr) {
     zona = 0;
     panabs = escenasval[aula][zona][0];
     tiltabs = escenasval[aula][zona][1];
@@ -132,7 +132,7 @@ void pizarra(GtkWidget *wid, gpointer ptr) {
     go_to_scene();
 }
 
-void pantalla(GtkWidget *wid, gpointer ptr) {
+void go_to_screen(GtkWidget *wid, gpointer ptr) {
     zona = 1;
     panabs = escenasval[aula][zona][0];
     tiltabs = escenasval[aula][zona][1];
@@ -140,7 +140,7 @@ void pantalla(GtkWidget *wid, gpointer ptr) {
     go_to_scene();
 }
 
-void profesor(GtkWidget *wid, gpointer ptr) {
+void go_to_teacher_table(GtkWidget *wid, gpointer ptr) {
     zona = 2;
     panabs = escenasval[aula][zona][0];
     tiltabs = escenasval[aula][zona][1];
@@ -148,7 +148,7 @@ void profesor(GtkWidget *wid, gpointer ptr) {
     go_to_scene();
 }
 
-void general(GtkWidget *wid, gpointer ptr) {
+void go_to_general_view(GtkWidget *wid, gpointer ptr) {
     zona = 3;
     panabs = escenasval[aula][zona][0];
     tiltabs = escenasval[aula][zona][1];
@@ -156,10 +156,18 @@ void general(GtkWidget *wid, gpointer ptr) {
     go_to_scene();
 }
 
+void quit(GtkWidget *wid, gpointer window) {
+    gtk_window_close(window);
+}
+
+void on_menu_item_about(GtkWidget *widget, gpointer dialog) {
+    gtk_widget_show(dialog);
+}
+
 void activate(GtkApplication *application, gpointer user_data) {
     // Window
     GtkBuilder *builder = gtk_builder_new();
-    gtk_builder_add_from_file(builder, "../layout.glade", NULL);
+    gtk_builder_add_from_resource(builder, "/es/sevilinux/uatptzlinux/layout.glade", NULL);
 
     GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "window"));
 
@@ -168,69 +176,14 @@ void activate(GtkApplication *application, gpointer user_data) {
     gtk_widget_show_all(window);
 
     // Signals
-
-    // Exit Button
-    GtkWidget *exit_button = GTK_WIDGET(gtk_builder_get_object(builder, "exit_button"));
-    g_signal_connect(exit_button, "clicked", G_CALLBACK(gtk_window_close), NULL);
-
-    // Reset Scenes Button
-    GtkWidget *reset_scenes = GTK_WIDGET(gtk_builder_get_object(builder, "reset_button"));
-    g_signal_connect(reset_scenes, "clicked", G_CALLBACK(resetescenas), NULL);
-
-    // Pan Relative + Button
-    GtkWidget *pan_rel_incr_button = GTK_WIDGET(gtk_builder_get_object(builder, "pan_rel_incr_button"));
-    g_signal_connect(pan_rel_incr_button, "clicked", G_CALLBACK(panrelp), NULL);
-
-    // Pan Relative - Button
-    GtkWidget *pan_rel_decr_button = GTK_WIDGET(gtk_builder_get_object(builder, "pan_rel_decr_button"));
-    g_signal_connect(pan_rel_decr_button, "clicked", G_CALLBACK(panrelm), NULL);
-
-    // Tilt Relative + Button
-    GtkWidget *tilt_rel_incr_button = GTK_WIDGET(gtk_builder_get_object(builder, "tilt_rel_incr_button"));
-    g_signal_connect(tilt_rel_incr_button, "clicked", G_CALLBACK(tiltrelp), NULL);
-
-    // Tilt Relative - Button
-    GtkWidget *tilt_rel_decr_button = GTK_WIDGET(gtk_builder_get_object(builder, "tilt_rel_decr_button"));
-    g_signal_connect(tilt_rel_decr_button, "clicked", G_CALLBACK(tiltrelm), NULL);
-
-    // Zoom + Button
-    GtkWidget *zoom_incr_button = GTK_WIDGET(gtk_builder_get_object(builder, "zoom_incr_button"));
-    g_signal_connect(zoom_incr_button, "clicked", G_CALLBACK(increase_zoom), NULL);
-
-    // Zoom + Button
-    GtkWidget *zoom_decr_button = GTK_WIDGET(gtk_builder_get_object(builder, "zoom_decr_button"));
-    g_signal_connect(zoom_decr_button, "clicked", G_CALLBACK(decrease_zoom), NULL);
-
-    // Blackboard Button
-    GtkWidget *blackboard_button = GTK_WIDGET(gtk_builder_get_object(builder, "blackboard_button"));
-    g_signal_connect(blackboard_button, "clicked", G_CALLBACK(pizarra), NULL);
-
-    // Screen Button
-    GtkWidget *screen_button = GTK_WIDGET(gtk_builder_get_object(builder, "screen_button"));
-    g_signal_connect(screen_button, "clicked", G_CALLBACK(pantalla), NULL);
-
-    // Teacher's Table Button
-    GtkWidget *teacher_table_button = GTK_WIDGET(gtk_builder_get_object(builder, "teacher_table_button"));
-    g_signal_connect(teacher_table_button, "clicked", G_CALLBACK(profesor), NULL);
-
-    // General View Button
-    GtkWidget *general_view_button = GTK_WIDGET(gtk_builder_get_object(builder, "general_view_button"));
-    g_signal_connect(general_view_button, "clicked", G_CALLBACK(general), NULL);
-
-    // Change Device Combo Box
-    GtkWidget *device_chooser = GTK_WIDGET(gtk_builder_get_object(builder, "device_chooser"));
-    g_signal_connect (device_chooser, "changed", G_CALLBACK(choose_device), NULL);
-
-    // Change Class Combo Box
-    GtkWidget *class_chooser = GTK_WIDGET(gtk_builder_get_object(builder, "class_chooser"));
-    g_signal_connect (class_chooser, "changed", G_CALLBACK(choose_class), NULL);
+    gtk_builder_connect_signals(builder, NULL);
 }
 
 int main(int argc, char *argv[]) {
     GtkApplication *application;
     int status;
 
-    application = gtk_application_new("es.sevilinux.controlptz", G_APPLICATION_FLAGS_NONE);
+    application = gtk_application_new("es.sevilinux.uatptzlinux", G_APPLICATION_FLAGS_NONE);
     g_signal_connect(application, "activate", G_CALLBACK(activate), NULL);
     status = g_application_run(G_APPLICATION(application), argc, argv);
     g_object_unref(application);
