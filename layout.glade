@@ -4,12 +4,17 @@
   <requires lib="gtk+" version="3.22"/>
   <object class="GtkAboutDialog" id="about_dialog">
     <property name="can_focus">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center</property>
+    <property name="icon_name">camera-video</property>
     <property name="type_hint">dialog</property>
+    <property name="gravity">center</property>
     <property name="program_name">Control cámara PTZ</property>
     <property name="version">0.1-b1</property>
     <property name="authors">Manuel Alcaraz Zambrano
 José Manuel Alcaraz Pelegrina</property>
     <property name="logo_icon_name">camera-video</property>
+    <property name="license_type">gpl-3-0</property>
     <signal name="response" handler="gtk_widget_hide" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox">
@@ -27,51 +32,41 @@ José Manuel Alcaraz Pelegrina</property>
             <property name="position">0</property>
           </packing>
         </child>
-        <child>
-          <placeholder/>
-        </child>
       </object>
     </child>
     <child type="titlebar">
       <placeholder/>
     </child>
   </object>
-  <object class="GtkWindow" id="window">
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="icon_name">view-refresh</property>
+  </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">zoom-in</property>
+  </object>
+  <object class="GtkImage" id="image3">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">zoom-out</property>
+  </object>
+  <object class="GtkApplicationWindow" id="window">
+    <property name="can_focus">False</property>
+    <property name="window_position">center</property>
+    <property name="icon_name">camera-video</property>
     <property name="gravity">center</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
+        <property name="spacing">4</property>
         <child>
           <object class="GtkMenuBar">
-            <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <child>
-              <object class="GtkMenuItem">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Archivo</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem">
-                        <property name="label">gtk-quit</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <signal name="activate" handler="quit" object="window" swapped="no"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
             <child>
               <object class="GtkMenuItem">
                 <property name="visible">True</property>
@@ -107,6 +102,63 @@ José Manuel Alcaraz Pelegrina</property>
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="homogeneous">True</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Dispositivo</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Zoom</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Clase</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="spacing">4</property>
             <property name="homogeneous">True</property>
             <child>
@@ -117,25 +169,11 @@ José Manuel Alcaraz Pelegrina</property>
                 <property name="spacing">4</property>
                 <property name="homogeneous">True</property>
                 <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Device</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkComboBoxText" id="device_chooser">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="active">0</property>
+                    <property name="popup_fixed_width">False</property>
                     <property name="active_id">0</property>
                     <items>
                       <item id="0" translatable="yes">/dev/video0</item>
@@ -250,6 +288,21 @@ José Manuel Alcaraz Pelegrina</property>
                     <property name="position">4</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkButton" id="reset_button">
+                    <property name="label" translatable="yes">Reiniciar</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="image">image1</property>
+                    <signal name="clicked" handler="reset_scenes" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">5</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -265,34 +318,13 @@ José Manuel Alcaraz Pelegrina</property>
                 <property name="spacing">4</property>
                 <property name="homogeneous">True</property>
                 <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Zoom</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkButton" id="zoom_incr_button">
+                    <property name="label" translatable="yes">Ampliar</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="image">image2</property>
                     <signal name="clicked" handler="increase_zoom" swapped="no"/>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="icon_name">zoom-in</property>
-                        <property name="icon_size">6</property>
-                      </object>
-                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -302,18 +334,12 @@ José Manuel Alcaraz Pelegrina</property>
                 </child>
                 <child>
                   <object class="GtkButton" id="zoom_decr_button">
+                    <property name="label" translatable="yes">Reducir</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="image">image3</property>
                     <signal name="clicked" handler="decrease_zoom" swapped="no"/>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="icon_name">zoom-out</property>
-                        <property name="icon_size">6</property>
-                      </object>
-                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -335,21 +361,6 @@ José Manuel Alcaraz Pelegrina</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">4</property>
                 <property name="homogeneous">True</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Class</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
                 <child>
                   <object class="GtkComboBoxText" id="class_chooser">
                     <property name="visible">True</property>
@@ -373,7 +384,7 @@ José Manuel Alcaraz Pelegrina</property>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Scene</property>
+                    <property name="label" translatable="yes">Escena</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -386,7 +397,7 @@ José Manuel Alcaraz Pelegrina</property>
                 </child>
                 <child>
                   <object class="GtkButton" id="blackboard_button">
-                    <property name="label" translatable="yes">Blackboard</property>
+                    <property name="label" translatable="yes">Pizarra</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
@@ -400,7 +411,7 @@ José Manuel Alcaraz Pelegrina</property>
                 </child>
                 <child>
                   <object class="GtkButton" id="screen_button">
-                    <property name="label" translatable="yes">Screen</property>
+                    <property name="label" translatable="yes">Pantalla</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
@@ -414,7 +425,7 @@ José Manuel Alcaraz Pelegrina</property>
                 </child>
                 <child>
                   <object class="GtkButton" id="teacher_table_button">
-                    <property name="label" translatable="yes">Teacher's Table</property>
+                    <property name="label" translatable="yes">Mesa del profesor</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
@@ -428,7 +439,7 @@ José Manuel Alcaraz Pelegrina</property>
                 </child>
                 <child>
                   <object class="GtkButton" id="general_view_button">
-                    <property name="label" translatable="yes">General View</property>
+                    <property name="label" translatable="yes">Vista general</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
@@ -447,60 +458,11 @@ José Manuel Alcaraz Pelegrina</property>
                 <property name="position">2</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <property name="spacing">4</property>
-                <property name="homogeneous">True</property>
-                <child>
-                  <object class="GtkButton" id="reset_button">
-                    <property name="label" translatable="yes">Reset</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="clicked" handler="reset_scenes" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="exit_button">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="clicked" handler="gtk_window_close" swapped="no"/>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="icon_name">application-exit</property>
-                        <property name="icon_size">6</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">3</property>
-              </packing>
-            </child>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>

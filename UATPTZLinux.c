@@ -39,28 +39,28 @@ void choose_device(GtkWidget *wid, gpointer ptr) {
 }
 
 
-void turn_up(GtkWidget *wid, gpointer ptr) {
+void turn_left(GtkWidget *wid, gpointer ptr) {
     if (panabs < (maxpan - steppan)) {
         panabs += steppan;
         go_to_scene();
     }
 }
 
-void turn_down(GtkWidget *wid, gpointer ptr) {
+void turn_right(GtkWidget *wid, gpointer ptr) {
     if (panabs > (minpan + steppan)) {
         panabs -= steppan;
         go_to_scene();
     }
 }
 
-void turn_right(GtkWidget *wid, gpointer ptr) {
+void turn_up(GtkWidget *wid, gpointer ptr) {
     if (tiltabs < (maxtilt - steptilt)) {
         tiltabs += steptilt;
         go_to_scene();
     }
 }
 
-void turn_left(GtkWidget *wid, gpointer ptr) {
+void turn_down(GtkWidget *wid, gpointer ptr) {
     if (tiltabs > (mintilt + steptilt)) {
         tiltabs -= steptilt;
         go_to_scene();
@@ -72,8 +72,6 @@ void increase_zoom(GtkWidget *wid, gpointer ptr) {
         zoomabs++;
         go_to_scene();
     }
-
-
 }
 
 void decrease_zoom(GtkWidget *wid, gpointer ptr) {
