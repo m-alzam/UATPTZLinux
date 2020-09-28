@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.36.0 -->
+<!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.22"/>
   <object class="GtkAboutDialog" id="about_dialog">
@@ -16,6 +16,9 @@ José Manuel Alcaraz Pelegrina</property>
     <property name="logo_icon_name">camera-video</property>
     <property name="license_type">gpl-3-0</property>
     <signal name="response" handler="gtk_widget_hide" swapped="no"/>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -33,9 +36,6 @@ José Manuel Alcaraz Pelegrina</property>
           </packing>
         </child>
       </object>
-    </child>
-    <child type="titlebar">
-      <placeholder/>
     </child>
   </object>
   <object class="GtkImage" id="image1">
@@ -58,6 +58,9 @@ José Manuel Alcaraz Pelegrina</property>
     <property name="window_position">center</property>
     <property name="icon_name">camera-video</property>
     <property name="gravity">center</property>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -122,22 +125,7 @@ José Manuel Alcaraz Pelegrina</property>
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Zoom</property>
-                <attributes>
-                  <attribute name="weight" value="bold"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Clase</property>
+                <property name="label" translatable="yes">Aula</property>
                 <attributes>
                   <attribute name="weight" value="bold"/>
                 </attributes>
@@ -201,7 +189,7 @@ José Manuel Alcaraz Pelegrina</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="icon_name">go-up</property>
-                        <property name="icon_size">6</property>
+                        <property name="icon_size">3</property>
                       </object>
                     </child>
                   </object>
@@ -228,7 +216,7 @@ José Manuel Alcaraz Pelegrina</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="icon_name">go-previous</property>
-                            <property name="icon_size">6</property>
+                            <property name="icon_size">3</property>
                           </object>
                         </child>
                       </object>
@@ -249,7 +237,7 @@ José Manuel Alcaraz Pelegrina</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="icon_name">go-next</property>
-                            <property name="icon_size">6</property>
+                            <property name="icon_size">3</property>
                           </object>
                         </child>
                       </object>
@@ -278,7 +266,7 @@ José Manuel Alcaraz Pelegrina</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="icon_name">go-down</property>
-                        <property name="icon_size">6</property>
+                        <property name="icon_size">3</property>
                       </object>
                     </child>
                   </object>
@@ -289,18 +277,46 @@ José Manuel Alcaraz Pelegrina</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="reset_button">
-                    <property name="label" translatable="yes">Reiniciar</property>
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="image">image1</property>
-                    <signal name="clicked" handler="reset_scenes" swapped="no"/>
+                    <property name="can_focus">False</property>
+                    <property name="spacing">4</property>
+                    <property name="homogeneous">True</property>
+                    <child>
+                      <object class="GtkButton" id="zoom_incr_button">
+                        <property name="label" translatable="yes">Ampliar</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="image">image2</property>
+                        <signal name="clicked" handler="increase_zoom" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="zoom_decr_button">
+                        <property name="label" translatable="yes">Reducir</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="image">image3</property>
+                        <signal name="clicked" handler="decrease_zoom" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">5</property>
+                    <property name="position">4</property>
                   </packing>
                 </child>
               </object>
@@ -308,50 +324,6 @@ José Manuel Alcaraz Pelegrina</property>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <property name="spacing">4</property>
-                <property name="homogeneous">True</property>
-                <child>
-                  <object class="GtkButton" id="zoom_incr_button">
-                    <property name="label" translatable="yes">Ampliar</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="image">image2</property>
-                    <signal name="clicked" handler="increase_zoom" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="zoom_decr_button">
-                    <property name="label" translatable="yes">Reducir</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="image">image3</property>
-                    <signal name="clicked" handler="decrease_zoom" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -377,7 +349,7 @@ José Manuel Alcaraz Pelegrina</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
@@ -392,7 +364,7 @@ José Manuel Alcaraz Pelegrina</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">2</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
@@ -406,7 +378,7 @@ José Manuel Alcaraz Pelegrina</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">3</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
                 <child>
@@ -420,7 +392,7 @@ José Manuel Alcaraz Pelegrina</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">4</property>
+                    <property name="position">3</property>
                   </packing>
                 </child>
                 <child>
@@ -434,7 +406,7 @@ José Manuel Alcaraz Pelegrina</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">5</property>
+                    <property name="position">4</property>
                   </packing>
                 </child>
                 <child>
@@ -444,6 +416,21 @@ José Manuel Alcaraz Pelegrina</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <signal name="clicked" handler="go_to_general_view" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">5</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="reset_button">
+                    <property name="label" translatable="yes">Reiniciar</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="image">image1</property>
+                    <signal name="clicked" handler="reset_scenes" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -466,9 +453,6 @@ José Manuel Alcaraz Pelegrina</property>
           </packing>
         </child>
       </object>
-    </child>
-    <child type="titlebar">
-      <placeholder/>
     </child>
   </object>
 </interface>
