@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 -->
+<!-- Generated with glade 3.36.0 
+
+Copyright (C) Manuel Alcaraz Zambrano, José Manuel Alcaraz Pelegrina.
+
+This file is part of UATPTZLinux.
+
+UATPTZLinux is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+UATPTZLinux is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with UATPTZLinux.  If not, see <http://www.gnu.org/licenses/>.
+
+Authors:
+Manuel Alcaraz Zambrano
+José Manuel Alcaraz Pelegrina
+
+-->
 <interface>
   <requires lib="gtk+" version="3.22"/>
+  <!-- interface-license-type gplv3 -->
+  <!-- interface-name UATPTZLinux -->
+  <!-- interface-description Control de c\303\241mara PTZ -->
+  <!-- interface-copyright Manuel Alcaraz Zambrano, Jos\303\251 Manuel Alcaraz Pelegrina. -->
+  <!-- interface-authors Manuel Alcaraz Zambrano\nJos\303\251 Manuel Alcaraz Pelegrina -->
   <object class="GtkAboutDialog" id="about_dialog">
     <property name="can_focus">False</property>
     <property name="modal">True</property>
@@ -16,9 +44,6 @@ José Manuel Alcaraz Pelegrina</property>
     <property name="logo_icon_name">camera-video</property>
     <property name="license_type">gpl-3-0</property>
     <signal name="response" handler="gtk_widget_hide" swapped="no"/>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -36,6 +61,9 @@ José Manuel Alcaraz Pelegrina</property>
           </packing>
         </child>
       </object>
+    </child>
+    <child type="titlebar">
+      <placeholder/>
     </child>
   </object>
   <object class="GtkImage" id="image1">
@@ -58,9 +86,6 @@ José Manuel Alcaraz Pelegrina</property>
     <property name="window_position">center</property>
     <property name="icon_name">camera-video</property>
     <property name="gravity">center</property>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -81,12 +106,10 @@ José Manuel Alcaraz Pelegrina</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImageMenuItem">
-                        <property name="label">gtk-about</property>
+                      <object class="GtkMenuItem">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
+                        <property name="label" translatable="yes">Acerca de</property>
                         <signal name="activate" handler="on_menu_item_about" object="about_dialog" swapped="no"/>
                       </object>
                     </child>
@@ -453,6 +476,9 @@ José Manuel Alcaraz Pelegrina</property>
           </packing>
         </child>
       </object>
+    </child>
+    <child type="titlebar">
+      <placeholder/>
     </child>
   </object>
 </interface>
