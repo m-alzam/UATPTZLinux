@@ -2,5 +2,7 @@
 <gresources>
     <gresource prefix="/es/sevilinux/uatptzlinux">
         <file preprocess="xml-stripblanks">layout.glade</file>
+        <file>icons/LOGOUAT2020.png</file>
+	<file>icons/LogoUCO2020.png</file>
     </gresource>
 </gresources>
