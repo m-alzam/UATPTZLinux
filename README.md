@@ -25,6 +25,8 @@ make
 ```
 Se creará un archivo ejecutable llamado UATPTZLinux.
 
+## Run
+
 Para ejecutar el programa teclear desde un terminal:
 
 ```bash
