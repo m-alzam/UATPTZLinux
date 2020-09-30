@@ -22,7 +22,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include "classes.h"
-
+#include "presetsload.h"
 
 int maxpan = 606918;
 int minpan = -606112;
@@ -46,11 +46,12 @@ void go_to_scene();
 
 void activate();
 
-void choose_class(GtkWidget *wid, gpointer ptr) {
-    aula = gtk_combo_box_get_active(GTK_COMBO_BOX (wid));
+void choose_class(GtkFileChooserButton *btn, gpointer ptr) {
+    presets_file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER(btn));
     //char *selected = gtk_combo_box_text_get_active_text ( GTK_COMBO_BOX_TEXT (wid));
     //printf ("The value of the combo is %d %s\n", sel, selected);
-    printf("El aula es %d\n", aula);
+    presets_load();
+    printf("El aula es %s\n", presets_file);
 }
 
 void choose_device(GtkWidget *wid, gpointer ptr) {
@@ -58,6 +59,8 @@ void choose_device(GtkWidget *wid, gpointer ptr) {
     selected = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT (wid));
     printf("El device es %d %s \n", actdevice, selected);
 }
+
+
 
 
 void turn_left(GtkWidget *wid, gpointer ptr) {
@@ -145,35 +148,44 @@ void reset_scenes() {
 
 void go_to_blackboard(GtkWidget *wid, gpointer ptr) {
     zona = 0;
-    panabs = escenasval[aula][zona][0];
-    tiltabs = escenasval[aula][zona][1];
-    zoomabs = escenasval[aula][zona][2];
+    panabs = escenasval[zona][0];
+    tiltabs = escenasval[zona][1];
+    zoomabs = escenasval[zona][2];
     go_to_scene();
 }
 
 void go_to_screen(GtkWidget *wid, gpointer ptr) {
     zona = 1;
-    panabs = escenasval[aula][zona][0];
-    tiltabs = escenasval[aula][zona][1];
-    zoomabs = escenasval[aula][zona][2];
+    panabs = escenasval[zona][0];
+    tiltabs = escenasval[zona][1];
+    zoomabs = escenasval[zona][2];
     go_to_scene();
 }
 
 void go_to_teacher_table(GtkWidget *wid, gpointer ptr) {
     zona = 2;
-    panabs = escenasval[aula][zona][0];
-    tiltabs = escenasval[aula][zona][1];
-    zoomabs = escenasval[aula][zona][2];
+    panabs = escenasval[zona][0];
+    tiltabs = escenasval[zona][1];
+    zoomabs = escenasval[zona][2];
     go_to_scene();
 }
 
 void go_to_general_view(GtkWidget *wid, gpointer ptr) {
     zona = 3;
-    panabs = escenasval[aula][zona][0];
-    tiltabs = escenasval[aula][zona][1];
-    zoomabs = escenasval[aula][zona][2];
+    panabs = escenasval[zona][0];
+    tiltabs = escenasval[zona][1];
+    zoomabs = escenasval[zona][2];
     go_to_scene();
 }
+
+void go_to_frontal_view(GtkWidget *wid, gpointer ptr) {
+    zona = 4;
+    panabs = escenasval[zona][0];
+    tiltabs = escenasval[zona][1];
+    zoomabs = escenasval[zona][2];
+    go_to_scene();
+}
+
 
 void quit(GtkWidget *wid, gpointer window) {
     gtk_window_close(window);

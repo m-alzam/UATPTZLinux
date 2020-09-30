@@ -278,28 +278,6 @@ José Manuel Alcaraz Pelegrina</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="pan_rel_decr_button">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="image_position">bottom</property>
-                    <signal name="clicked" handler="turn_down" swapped="no"/>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="icon_name">go-down</property>
-                        <property name="icon_size">3</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">4</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -342,6 +320,28 @@ José Manuel Alcaraz Pelegrina</property>
                     <property name="position">4</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkButton" id="pan_rel_decr_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="image_position">bottom</property>
+                    <signal name="clicked" handler="turn_down" swapped="no"/>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="icon_name">go-down</property>
+                        <property name="icon_size">3</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -357,17 +357,12 @@ José Manuel Alcaraz Pelegrina</property>
                 <property name="spacing">4</property>
                 <property name="homogeneous">True</property>
                 <child>
-                  <object class="GtkComboBoxText" id="class_chooser">
+                  <object class="GtkFileChooserButton">
+                    <property name="name">SelectorPresetsAula</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="active">0</property>
-                    <property name="active_id">0</property>
-                    <items>
-                      <item id="0" translatable="yes">SUM</item>
-                      <item id="1" translatable="yes">Aula B11</item>
-                      <item id="2" translatable="yes">SUM 2</item>
-                    </items>
-                    <signal name="changed" handler="choose_class" swapped="no"/>
+                    <property name="title" translatable="yes">Aula</property>
+                    <signal name="file-set" handler="choose_class" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -447,6 +442,20 @@ José Manuel Alcaraz Pelegrina</property>
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkButton" id="frontal_view_button">
+                    <property name="label" translatable="yes">Vista Frontal</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="go_to_frontal_view" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">6</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkButton" id="reset_button">
                     <property name="label" translatable="yes">Reiniciar</property>
                     <property name="visible">True</property>
@@ -458,7 +467,7 @@ José Manuel Alcaraz Pelegrina</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">6</property>
+                    <property name="position">7</property>
                   </packing>
                 </child>
               </object>

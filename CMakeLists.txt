@@ -13,9 +13,10 @@ LINK_DIRECTORIES(${GTK3_LIBRARY_DIRS})
 
 ADD_DEFINITIONS(${GTK3_CFLAGS_OTHER})
 
-add_executable(UATPTZLinux classes.h UATPTZLinux.c resources.c)
+add_executable(UATPTZLinux presetsload.h classes.h UATPTZLinux.c resources.c)
 
 TARGET_LINK_LIBRARIES(UATPTZLinux ${GTK3_LIBRARIES})
+TARGET_LINK_LIBRARIES(UATPTZLinux json-c)
 
 add_custom_target(compile_resources
         COMMAND glib-compile-resources ${CMAKE_CURRENT_SOURCE_DIR}/uatptzlinux.gresource.xml --target=${CMAKE_CURRENT_SOURCE_DIR}/resources.c --generate-source --sourcedir=${CMAKE_CURRENT_SOURCE_DIR}
