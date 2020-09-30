@@ -39,7 +39,7 @@ José Manuel Alcaraz Pelegrina
     <property name="gravity">center</property>
     <property name="program_name">Control cámara PTZ</property>
     <property name="version">0.1-b1</property>
-    <property name="comments" translatable="yes">Realizado para la Unidad de Apoyo Tecnológico de la UCO</property>
+    <property name="comments" translatable="yes">Con la colaboración de la Unidad de Apoyo Tecnológico de la UCO</property>
     <property name="authors">Manuel Alcaraz Zambrano
 José Manuel Alcaraz Pelegrina</property>
     <property name="logo_icon_name">camera-video</property>
