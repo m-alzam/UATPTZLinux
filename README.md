@@ -1,15 +1,16 @@
 # UATPTZLinux
-Programa para controlar cámaras PTZ que soporten las opciones "pan_absolute", "tilt_absolute" y "zoom_absolute" (o similares).
+Programa para controlar cámaras PTZ que soporten las opciones `pan_absolute`, `tilt_absolute` y `zoom_absolute` (o similares).
 Está desarrollado para las cámaras que usa la Universidad de Córdoba, AVER VC520 Pro, aunque puede configurarse fácilmente para otros modelos de cámaras PTZ.
 
-## Build
+## Construir
 
-Son necesarias las librerias "libgtk-3" y "libjson-c4", así como el paquete "v4l-utils" para ejecutar el programa. Se pueden instalar con:
+Son necesarias las librerias `libgtk-3` y `libjson-c4`, así como el paquete `v4l-utils` para ejecutar el programa. Se pueden instalar con:
 
 ```bash
 sudo apt install libgtk-3 libjson-c4 v4l-utils
 ```
-Si se va a compilar el código fuente son necesarias las librerias de desarrollo libgtk-3-dev y libjson-c-dev que se pueden instalar con:
+
+Si se va a compilar el código fuente son necesarias las librerias de desarrollo `libgtk-3-dev` y `libjson-c-dev` que se pueden instalar con:
 
 ```bash
 sudo apt install libgtk3-dev libjson-c-dev
@@ -23,9 +24,10 @@ cd cmake-build-debug
 cmake ..
 make
 ```
-Se creará un archivo ejecutable llamado UATPTZLinux.
 
-## Run
+Se creará un archivo ejecutable llamado `UATPTZLinux`.
+
+## Ejecutar
 
 Para ejecutar el programa teclear desde un terminal:
 
@@ -36,14 +38,15 @@ Se abrirá una ventana como esta:
 
 ![Ventana de UATPTZLinux](images/UATPTZLinux.png)
 
-En el desplegable "Dispositivo" escogemos el que corresponda a la cámara. El programa en esta versión aún no detecta la cámara pero suele ser "/dev/video1" si tenemos un portátil con webcam. Podemos saber qué dispositivo es si desde un terminal ejecutamos:
+En el desplegable *Dispositivo* escogemos el que corresponda a la cámara. La actual versión aún no detecta la cámara pero suele ser `/dev/video1` si tenemos un portátil con webcam. Podemos saber qué dispositivo es si desde un terminal ejecutamos:
 
 ```bash
 v4l2-ctl --list-devices
 ```
+
 Una vez seleccionado el dispositivo tenemos que indicar el archivo que contiene los presets (escenas predefinidas) para el aula que vayamos a usar. En Aula tenemos un botón para seleccionar el archivo. El formato de ese archivo es json y su contendido será de la forma:
 
-```bash
+```json
 [
   {
     "Name": "General",
@@ -84,13 +87,12 @@ El botón "Reiniciar" situa la cámara en los valores 0 para Pan, Tilt y Zoom.
 
 Para salir del programa pulsamos sobre el icono con una "X" de la parte superior derecha de la ventana.
 
-
-## Authors
+## Autores
 
 - Manuel Alcaraz Zambrano.
 - José Manuel Alcaraz Pelegrina.
 
-## [License](https://github.com/jmaphys/UATPTZLinux/blob/master/LICENSE)
+## [Licencia](https://github.com/jmaphys/UATPTZLinux/blob/master/LICENSE)
 
 ```
 This program is free software: you can redistribute it and/or modify
