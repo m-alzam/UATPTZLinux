@@ -18,7 +18,8 @@ add_executable(UATPTZLinux classes.h UATPTZLinux.c resources.c)
 TARGET_LINK_LIBRARIES(UATPTZLinux ${GTK3_LIBRARIES})
 
 add_custom_target(compile_resources
-        COMMAND glib-compile-resources ${CMAKE_CURRENT_SOURCE_DIR}/uatptzlinux.gresource.xml --target=${CMAKE_CURRENT_SOURCE_DIR}/resources.c --generate-source --sourcedir=${CMAKE_CURRENT_SOURCE_DIR})
+        COMMAND glib-compile-resources ${CMAKE_CURRENT_SOURCE_DIR}/uatptzlinux.gresource.xml --target=${CMAKE_CURRENT_SOURCE_DIR}/resources.c --generate-source --sourcedir=${CMAKE_CURRENT_SOURCE_DIR}
+        BYPRODUCTS ${CMAKE_CURRENT_SOURCE_DIR}/resources.c)
 
 add_dependencies(UATPTZLinux compile_resources)
 
