@@ -21,85 +21,63 @@
 
 #include <gtk/gtk.h>
 #include <string.h>
-#include "classes.h"
-#include "presetsload.h"
-
-int maxpan = 606918;
-int minpan = -606112;
-int maxtilt = 319104;
-int mintilt = -105537;
-int maxzoom = 996;
-int minzoom = 0;
-int steppan = 806;
-int steptilt = 831;
-
-int aula = 0; // Por defecto pone el SUM 1
-int actdevice = 0; //Por defecto pone video0
-char *selected = "/dev/video0";
-int zona = 0; // Por defecto zona 0 que es la Pizarra
-
-int panabs = 0;
-int tiltabs = 0;
-int zoomabs = 0;
+#include "data.h"
+#include "load_presets.h"
 
 void go_to_scene();
 
 void activate();
 
-void choose_class(GtkFileChooserButton *btn, gpointer ptr) {
-    presets_file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER(btn));
-    //char *selected = gtk_combo_box_text_get_active_text ( GTK_COMBO_BOX_TEXT (wid));
-    //printf ("The value of the combo is %d %s\n", sel, selected);
-    presets_load();
+void choose_class(GtkFileChooserButton *file_chooser_button, gpointer ptr) {
+    presets_file = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(file_chooser_button));
+    load_presets();
     printf("El aula es %s\n", presets_file);
 }
 
 void choose_device(GtkWidget *wid, gpointer ptr) {
-    actdevice = gtk_combo_box_get_active(GTK_COMBO_BOX (wid));
+    current_device = gtk_combo_box_get_active(GTK_COMBO_BOX (wid));
     selected = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT (wid));
-    printf("El device es %d %s \n", actdevice, selected);
+    printf("El device es %d %s \n", current_device, selected);
 }
 
 
-
-
 void turn_left(GtkWidget *wid, gpointer ptr) {
-    if (panabs < (maxpan - steppan)) {
-        panabs += steppan;
+    if (panabs < (max_pan - pan_step)) {
+        panabs += pan_step;
         go_to_scene();
     }
 }
 
 void turn_right(GtkWidget *wid, gpointer ptr) {
-    if (panabs > (minpan + steppan)) {
-        panabs -= steppan;
+    if (panabs > (min_pan + pan_step)) {
+        panabs -= pan_step;
         go_to_scene();
     }
 }
 
 void turn_up(GtkWidget *wid, gpointer ptr) {
-    if (tiltabs < (maxtilt - steptilt)) {
-        tiltabs += steptilt;
+    if (tiltabs < (max_tilt - tilt_step)) {
+        tiltabs += tilt_step;
         go_to_scene();
     }
 }
 
 void turn_down(GtkWidget *wid, gpointer ptr) {
-    if (tiltabs > (mintilt + steptilt)) {
-        tiltabs -= steptilt;
+    if (tiltabs > (min_tilt + tilt_step)) {
+        tiltabs -= tilt_step;
         go_to_scene();
     }
 }
 
 void increase_zoom(GtkWidget *wid, gpointer ptr) {
-    if (zoomabs < maxzoom) {
+    if (zoomabs < max_zoom) {
         zoomabs++;
         go_to_scene();
     }
 }
 
 void decrease_zoom(GtkWidget *wid, gpointer ptr) {
-    if (zoomabs > minzoom) {
+    if (zoomabs > min_zoom) {
         zoomabs--;
         go_to_scene();
     }
@@ -178,14 +156,13 @@ void go_to_general_view(GtkWidget *wid, gpointer ptr) {
     go_to_scene();
 }
 
-void go_to_frontal_view(GtkWidget *wid, gpointer ptr) {
+void go_to_front_view(GtkWidget *wid, gpointer ptr) {
     zona = 4;
     panabs = escenasval[zona][0];
     tiltabs = escenasval[zona][1];
     zoomabs = escenasval[zona][2];
     go_to_scene();
 }
-
 
 void quit(GtkWidget *wid, gpointer window) {
     gtk_window_close(window);

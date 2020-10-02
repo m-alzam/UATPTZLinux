@@ -1,22 +1,43 @@
 # UATPTZLinux
-Programa para controlar cámaras PTZ que soporten las opciones `pan_absolute`, `tilt_absolute` y `zoom_absolute` (o similares).
-Está desarrollado para las cámaras que usa la Universidad de Córdoba, AVER VC520 Pro, aunque puede configurarse fácilmente para otros modelos de cámaras PTZ.
+Programa para GNU/Linux que permite controlar cámaras PTZ, desarrollado para las cámaras que usa la Universidad de
+Córdoba (AVER VC520 Pro), aunque puede configurarse fácilmente para otros modelos de cámaras PTZ.
 
-## Construir
+## Instalación
 
-Son necesarias las librerias `libgtk-3` y `libjson-c4`, así como el paquete `v4l-utils` para ejecutar el programa. Se pueden instalar con:
+### Requisitos del sistema
+
+- `libgtk-3`
+- `libjson-c4`
+- `v4l-utils`
+
+En distribuciones Debian y derivadas se pueden instalar con:
 
 ```bash
 sudo apt install libgtk-3 libjson-c4 v4l-utils
 ```
 
-Si se va a compilar el código fuente son necesarias las librerias de desarrollo `libgtk-3-dev` y `libjson-c-dev` que se pueden instalar con:
+
+### Construir
+
+Para compilar el programa son necesarias las siguientes librerías de desarrollo:
+
+- `libgtk-3-dev`
+- `libjson-c-dev`
+
+En distribuciones Debian y derivadas se pueden instalar con:
 
 ```bash
 sudo apt install libgtk3-dev libjson-c-dev
 ```
 
-Para obtener el ejecutable, primero hay que descargar el código fuente a un directorio y dentro de ese directorio ejecutar los siguientes comandos:
+Descarga el código fuente:
+
+```bash
+git clone https://github.com/jmaphys/UATPTZLinux.git
+cd UATPTZLinux
+```
+
+Y compila el ejecutable:
 
 ```bash
 mkdir cmake-build-debug
@@ -25,26 +46,29 @@ cmake ..
 make
 ```
 
-Se creará un archivo ejecutable llamado `UATPTZLinux`.
+Se creará el archivo ejecutable `UATPTZLinux`.
 
-## Ejecutar
+## Uso
 
-Para ejecutar el programa teclear desde un terminal:
+Escribe el siguiente comando en un terminal y pulsa <kbd>Enter</kbd>:
 
 ```bash
 ./UATPTZLinux
 ```
+
 Se abrirá una ventana como esta:
 
-![Ventana de UATPTZLinux](images/UATPTZLinux.png)
+![Interfaz de UATPTZLinux](images/UATPTZLinux.png)
 
-En el desplegable *Dispositivo* escogemos el que corresponda a la cámara. La actual versión aún no detecta la cámara pero suele ser `/dev/video1` si tenemos un portátil con webcam. Podemos saber qué dispositivo es si desde un terminal ejecutamos:
+En el desplegable *Dispositivo* escoge el que corresponda a la cámara. La versión actual no detecta automáticamente la
+cámara, pero suele ser `/dev/video1` en un portátil con webcam. Para saber qué dispositivo es, usa el siguiente comando:
 
 ```bash
 v4l2-ctl --list-devices
 ```
 
-Una vez seleccionado el dispositivo tenemos que indicar el archivo que contiene los presets (escenas predefinidas) para el aula que vayamos a usar. En Aula tenemos un botón para seleccionar el archivo. El formato de ese archivo es json y su contendido será de la forma:
+Ahora carga el archivo de las escenas para el aula correspondiente con el botón de debajo de **Aula**. El formato del
+archivo debe ser json, con la siguiente estructura:
 
 ```json
 [
@@ -81,11 +105,9 @@ Una vez seleccionado el dispositivo tenemos que indicar el archivo que contiene 
 ]
 ```
 
-Una vez cargado el archivo con los presets basta con pulsar sobre los distintos botones para obtener las distintas escenas o para ajustar la orientación de la cámara.
+Ya puedes utilizar los botones de escenas para cambiar la posición de la cámara.
 
-El botón "Reiniciar" situa la cámara en los valores 0 para Pan, Tilt y Zoom.
-
-Para salir del programa pulsamos sobre el icono con una "X" de la parte superior derecha de la ventana.
+El botón *Reiniciar* situa la cámara en el valor 0 para Pan, Tilt y Zoom.
 
 ## Autores
 

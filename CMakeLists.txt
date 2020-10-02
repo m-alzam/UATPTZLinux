@@ -1,27 +1,30 @@
-cmake_minimum_required(VERSION 3.13)
-project(UATPTZLinux C)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.13)
+PROJECT(UATPTZLinux C)
 
-set(CMAKE_C_STANDARD 11)
+SET(CMAKE_C_STANDARD 11)
 
-include_directories(.)
+INCLUDE_DIRECTORIES(.)
 
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+FIND_PACKAGE(PkgConfig REQUIRED)
+PKG_CHECK_MODULES(GTK3 REQUIRED gtk+-3.0)
+PKG_CHECK_MODULES(JSON_C REQUIRED json-c)
 
 INCLUDE_DIRECTORIES(${GTK3_INCLUDE_DIRS})
 LINK_DIRECTORIES(${GTK3_LIBRARY_DIRS})
+INCLUDE_DIRECTORIES(${JSON_C_INCLUDE_DIRS})
+LINK_DIRECTORIES(${JSON_C_LIBRARY_DIRS})
 
 ADD_DEFINITIONS(${GTK3_CFLAGS_OTHER})
 
-add_executable(UATPTZLinux presetsload.h classes.h UATPTZLinux.c resources.c)
+ADD_EXECUTABLE(UATPTZLinux data.h load_presets.h UATPTZLinux.c resources.c)
 
 TARGET_LINK_LIBRARIES(UATPTZLinux ${GTK3_LIBRARIES})
-TARGET_LINK_LIBRARIES(UATPTZLinux json-c)
+TARGET_LINK_LIBRARIES(UATPTZLinux ${JSON_C_LIBRARIES})
 
-add_custom_target(compile_resources
+ADD_CUSTOM_TARGET(compile_resources
         COMMAND glib-compile-resources ${CMAKE_CURRENT_SOURCE_DIR}/uatptzlinux.gresource.xml --target=${CMAKE_CURRENT_SOURCE_DIR}/resources.c --generate-source --sourcedir=${CMAKE_CURRENT_SOURCE_DIR}
         BYPRODUCTS ${CMAKE_CURRENT_SOURCE_DIR}/resources.c)
 
-add_dependencies(UATPTZLinux compile_resources)
+ADD_DEPENDENCIES(UATPTZLinux compile_resources)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -rdynamic")
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -rdynamic")
