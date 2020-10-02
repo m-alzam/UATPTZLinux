@@ -30,8 +30,8 @@ int maxtilt = 319104;
 int mintilt = -105537;
 int maxzoom = 996;
 int minzoom = 0;
-int steppan = 806;
-int steptilt = 831;
+int steppan = 2*806;
+int steptilt = 2*831;
 
 int aula = 0; // Por defecto pone el SUM 1
 int actdevice = 0; //Por defecto pone video0
