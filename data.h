@@ -34,8 +34,8 @@ int max_tilt = 319104;
 int min_tilt = -105537;
 int max_zoom = 996;
 int min_zoom = 0;
-int pan_step = 806;
-int tilt_step = 831;
+int pan_step = 1612;
+int tilt_step = 1662;
 
 int current_device = 0; // /dev/video0
 char *selected = "/dev/video0";
