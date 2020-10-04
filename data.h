@@ -44,3 +44,5 @@ int zona = 0; // Por defecto zona 0 que es la Pizarra
 int panabs = 0;
 int tiltabs = 0;
 int zoomabs = 0;
+
+GtkWidget *about_dialog;

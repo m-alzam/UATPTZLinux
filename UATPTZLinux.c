@@ -25,9 +25,28 @@
 #include "load_presets.h"
 
 
-void go_to_scene();
+void go_to_scene(), activate(), about_activated();
 
-void activate();
+static GActionEntry app_entries[] = {
+        {"about", about_activated, NULL, NULL, NULL}
+};
+
+void run_command(char *command) {
+    gboolean result;
+    char *standard_out;
+    char *standard_err;
+    int exit_state;
+    GError *error;
+
+    result = g_spawn_command_line_sync(command, &standard_out, &standard_err, &exit_state, &error);
+
+    if (result == FALSE) {
+        g_print("An error occurred!");
+    } else {
+        g_print("%s", standard_out);
+        g_print("%s", standard_err);
+    }
+}
 
 void choose_class(GtkFileChooserButton *file_chooser_button, gpointer ptr) {
     presets_file = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(file_chooser_button));
@@ -110,11 +129,11 @@ void go_to_scene() {
     strcat(comandozoom, zoom);
 
     printf("%s\n", comandopan);
-    system(comandopan);
+    run_command(comandopan);
     printf("%s\n", comandotilt);
-    system(comandotilt);
+    run_command(comandotilt);
     printf("%s\n", comandozoom);
-    system(comandozoom);
+    run_command(comandozoom);
 }
 
 void reset_scenes() {
@@ -169,8 +188,8 @@ void quit(GtkWidget *wid, gpointer window) {
     gtk_window_close(window);
 }
 
-void on_menu_item_about(GtkWidget *widget, gpointer dialog) {
-    gtk_widget_show(dialog);
+void about_activated(GSimpleAction *action, GVariant *parameter, gpointer app) {
+    gtk_dialog_run(GTK_DIALOG(about_dialog));
 }
 
 void activate(GtkApplication *application, gpointer user_data) {
@@ -183,6 +202,11 @@ void activate(GtkApplication *application, gpointer user_data) {
     gtk_application_add_window(application, GTK_WINDOW(window));
     gtk_window_set_title(GTK_WINDOW(window), "Control cámara PTZ");
     gtk_widget_show_all(window);
+
+    about_dialog = GTK_WIDGET(gtk_builder_get_object(builder, "about_dialog"));
+
+    // Actions
+    g_action_map_add_action_entries(G_ACTION_MAP(application), app_entries, G_N_ELEMENTS(app_entries), application);
 
     // Signals
     gtk_builder_connect_signals(builder, NULL);
